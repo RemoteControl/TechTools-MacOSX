@@ -1,11 +1,10 @@
 #!/usr/bin/env bash
 # Bash skips errors and resumes by default
 
-# Time in seconds to sleep between request
-SLEEP_PERIOD=300
+# This script is based on the ad_login.vb script provided by untangle.com.  
 
-# log file
-#LOGFILE="/var/log/untangle_script_log.txt"
+# Time in seconds to sleep between requests
+SLEEP_PERIOD=300
 
 # Lets define the protocol to be used.
 URL_PREFIX="http"
@@ -17,25 +16,16 @@ else
   SERVERNAME="10.1.0.1"
 fi
 
-# Take out the comments below for testing the script
-# echo "ServerName is:"
-# echo $SERVERNAME
-
-# log any current user out of the Captive Portal (not Directory Connector)
+# log any previous user to system out of the Captive Portal (not Directory Connector)
 curl --location http://10.1.0.1/capture/logout
 
 # set strUSER to current user
 strUser=$USER
-# if ["$(USER)" == 'sscpslocal']; then
-#   strUser=joeadmin
-# else
-#   strUser=$USER
-# fi
  strDomain=AD
  strHostname=$(hostname -s)
 
 # This should "overwrite" any active Directory Connector credentials
-# Execute script until successful
+# Execute script until logout
 while true; do
      URLCOMMAND=${URL_PREFIX}"://"${SERVERNAME}"/adpb/registration?username="${strUser}"&domain="${strDomain}"&hostname="${strHostname}"&action=login"
 
