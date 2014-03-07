@@ -15,6 +15,7 @@
 #    This is standard Mac OS X permissions.  Done mostly in case local user is created with same name
 #    as domain users.
 # The instances where they are not in "Domain Users" but in SG group should not exist.  
+# All Domain users will get their local folders mounted to network location as well
 
 # Logging setup
 # vLogFileName="folder_lock.log"
