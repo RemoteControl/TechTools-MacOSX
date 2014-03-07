@@ -54,13 +54,14 @@ if [[ $groups =~ "Domain Users" ]]; then
 		chmod a-rwX /users/$USER/Desktop
 		chmod a-rwX /users/$USER/Public
 		
-		# Mount local folders to network location
-		# The dscl command returns "dsAttrTypeNative:homeDirectory: <full AD home folder path>
+		# Mount network location on local folder only for network users who do not write locally.
+		# The dscl command returns "dsAttrTypeNative:homeDirectory: <full AD home folder path>"
 		# awk parses this and makes its own space seperated variables
-		# so "dsAttrTypeNative:homeDirectory:" is $1 and i.e. "\\ROWLEY\FacStaffUserFiles$\jmcsheffrey" is $2, so we print $2
-	
+		# so "dsAttrTypeNative:homeDirectory:" is $1 and e.g. "\\ROWLEY\FacStaffUserFiles$\jmcsheffrey" is $2
+		# print $2 gives network location for $USER so that is what should be root of paths to mount
+
 		vHomeFolder=$( dscl "/Active Directory/AD/All Domains" -read /Users/$USER dsAttrTypeNative:homeDirectory | awk '{print $2}' )
-	
+
 		mount -t smbfs $vHomeFolder/Documents ~/Documents
 		mount -t smbfs $vHomeFolder/Movies ~/Movies
 		mount -t smbfs $vHomeFolder/Music ~/Music
