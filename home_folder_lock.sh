@@ -62,3 +62,18 @@ else
                 chmod u+rwX /users/$USER/Desktop
                 chmod u+rwX /users/$USER/Public
 fi
+
+# Mount local folders to network location
+# The dscl command returns "dsAttrTypeNative:homeDirectory: <full AD home folder path>
+# awk parses this and makes its own space seperated variables
+# so "dsAttrTypeNative:homeDirectory:" is $1 and i.e. "\\ROWLEY\FacStaffUserFiles$\jmcsheffrey" is $2, so we print $2
+
+vHomeFolder=$( dscl "/Active Directory/AD/All Domains" -read /Users/$USER dsAttrTypeNative:homeDirectory | awk '{print $2}' )
+
+mount -t smbfs $vHomeFolder/Documents ~/Documents
+mount -t smbfs $vHomeFolder/Movies ~/Movies
+mount -t smbfs $vHomeFolder/Music ~/Music
+mount -t smbfs $vHomeFolder/Pictures ~/Pictures
+mount -t smbfs $vHomeFolder/Downloads ~/Downloads
+mount -t smbfs $vHomeFolder/Desktop ~/Desktop
+mount -t smbfs $vHomeFolder/Public ~/Public
