@@ -3,10 +3,10 @@
 <plist version="1.0">
 <dict>
 <key>Label</key>
-<string>file_cleanup</string>
+<string>reset_chrome</string>
 <key>ProgramArguments</key>
 <array>
-<string>/usr/sbin/file_cleanup.sh</string>
+<string>/usr/sbin/reset_chrome.sh</string>
 </array>
 <key>RunAtLoad</key>
 <true/>
