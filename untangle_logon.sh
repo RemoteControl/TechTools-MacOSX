@@ -21,13 +21,13 @@ curl --location http://10.1.0.1/capture/logout
 
 # set strUSER to current user
 strUser=$USER
- strDomain=AD
- strHostname=$(hostname -s)
+strDomain=AD
+strHostname=$(hostname -s)
 
 # This should "overwrite" any active Directory Connector credentials
 # Execute script until logout
 while true; do
-     URLCOMMAND=${URL_PREFIX}"://"${SERVERNAME}"/adpb/registration?username="${strUser}"&domain="${strDomain}"&hostname="${strHostname}"&action=login"
+     URLCOMMAND=${URL_PREFIX}"://"${SERVERNAME}"/userapi/registration?username="${strUser}"&domain="${strDomain}"&hostname="${strHostname}"&action=login""&secretKey=jRMbLjkTZos"
 
      # Take out the comments below for testing the urlcommand
      # curl arguments: -f fails silently, -s silent mode with no progress status, -m maximum execution time allowed
