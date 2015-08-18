@@ -13,3 +13,4 @@ The scripts are:
   - untangle_logon.sh   - this is an adaptation of the scripts supplied by untangle.com for windows active
                           directory authentication integration.  PLEASE READ FILE FOR MORE INFORMATION.
 
+  - reset_chrome.sh     - this script erases the local student/teacher Chrome support files to remove any user data
